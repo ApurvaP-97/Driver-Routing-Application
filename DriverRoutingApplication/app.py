@@ -134,7 +134,7 @@ class Routes:
 class RoutingApplication:
     """ This is the driver class contains utility functions to run the application"""
 
-    def runRoutingApp(self):
+    def runRoutingApp(self,toConsole=False):
 
         #Command-line argument for driverShifts.csv file
         drivershiftsFile = sys.argv[1]
@@ -151,10 +151,10 @@ class RoutingApplication:
         routeMap = route.createRouteMap()
         assignMap = route.assignRoutes()
 
-        self.toJSONOutput(assignMap, pickupData, shiftMap)
+        self.toJSONOutput(assignMap, pickupData, shiftMap,toConsole)
 
     #To convert the assigned routes into required JSON format
-    def toJSONOutput(self,assignMap, pickupData, shiftMap):
+    def toJSONOutput(self,assignMap, pickupData, shiftMap,toConsole):
         assignedRoutes = []
         #Command-line argument for output file name. Ex: output.json
         outputfilename = sys.argv[3]
@@ -163,10 +163,13 @@ class RoutingApplication:
             itemMap = {'driverName': name, 'shift': shiftMap[name], 'pickups': pickups}
             assignedRoutes.append(itemMap)
 
-        with open(outputfilename, 'w') as f:
-            json.dump(assignedRoutes, f, indent=4)
+        if toConsole:
+            print('Assigned Routes:{}'.format(assignedRoutes))
+        else:
+            with open(outputfilename, 'w') as f:
+                json.dump(assignedRoutes, f, indent=4)
 
-        print('The assigned routes can be found in {}'.format(outputfilename))
+            print('The assigned routes can be found in {}'.format(outputfilename))
 
 
 if __name__ == '__main__':
@@ -174,4 +177,4 @@ if __name__ == '__main__':
     print('Driver Routing Application')
     print('--------------------------')
     app = RoutingApplication()
-    app.runRoutingApp()
+    app.runRoutingApp(toConsole=False)
