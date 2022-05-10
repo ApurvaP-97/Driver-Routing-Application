@@ -6,7 +6,9 @@
      <b><i>python app.py driverShifts.csv pickups.json output.json</i></b>
      
    Note: Output.json is the name of the output file with the pickups mapped to drivers.
-4. Run test_routes.py to verify the outputs. OutputRequired.json should be modified as per the expected output.
+4. By default, the output is directed to output.json file(toConsole=False). To get console output, set toConsole=True in the main function.<br> 
+     app.runRoutingApp(toConsole=True)
+6. Run test_routes.py to verify the outputs. OutputRequired.json should be modified as per the expected output.
 
 ## Assumptions/Tradeoffs: 
 1. If multiple drivers are working in the same shift, the pickup for that particular shift is assigned to one of them. That zone gets associated with the driver. 
