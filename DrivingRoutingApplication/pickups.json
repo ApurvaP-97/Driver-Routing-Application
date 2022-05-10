@@ -1,0 +1,27 @@
+[
+  {
+    "address": "123 Main St, Palo Alto, CA",
+    "zone": "a",
+    "pickupWindow": "morning"
+  },
+  {
+    "address": "456 Maple Rd, Palo Alto, CA",
+    "zone": "b",
+    "pickupWindow": "afternoon"
+  },
+  {
+    "address": "125 Main St, Palo Alto, CA",
+    "zone": "a",
+    "pickupWindow": "morning"
+  },
+  {
+    "address": "480 Maple Rd, Palo Alto, CA",
+    "zone": "b",
+    "pickupWindow": "morning"
+  },
+  {
+    "address": "123 Main St, Palo Alto, CA",
+    "zone": "a",
+    "pickupWindow": "evening"
+  }
+]
