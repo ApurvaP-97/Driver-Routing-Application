@@ -5,6 +5,8 @@ from collections import defaultdict
 
 
 class Driver:
+    """ This class is used to hold Driver object information parsed from the driverShifts.csv file.
+     Creates driverShifts({shift:[list of drivers]}) and shiftMap({driver name: shift})"""
 
     def __init__(self, name=None, zone=None, shift=None):
         self.name = name
@@ -12,6 +14,7 @@ class Driver:
         self.shift = shift
         self.shiftMap = {}
         self.driverShifts = defaultdict(list)
+
 
     def fetchDriverDetails(self, filename):
         reader = csv.reader(open(filename))
@@ -25,6 +28,9 @@ class Driver:
 
 
 class Pickup:
+    """ This class is used to hold Pickup object information parsed from the pickups.json file.
+        Utility functions to fetch pickupwindow, pickupzone.
+        Creates shiftZoneMap({shift:[zone]}) and zoneCountMap({zone:count}) """
 
     def __init__(self, address=None, pickupwindow=None, pickupzone=None):
         self.address = address
@@ -63,6 +69,11 @@ class Pickup:
 
 
 class Routes:
+    """ This class contains utility functions to
+        (1) createRouteMap : Creates routeMap {shift: [list of drivers],zonecountMap}
+        (2) updateRouteMap : Updates the zonecounts once the pickup is assigned to a driver
+        (3) assignRoutes   : Assigns pickup to the drivers having the same shift as the pickup.
+                             Logic to ensure that all of driver's pickups are in same zone. """
 
     def __init__(self, driverShifts, pickupData, zoneMap):
         self.routeMap = {}
@@ -121,10 +132,13 @@ class Routes:
         return self.assignMap
 
 class RoutingApplication:
+    """ This is the driver class contains utility functions to run the application"""
 
     def runRoutingApp(self):
 
+        #Command-line argument for driverShifts.csv file
         drivershiftsFile = sys.argv[1]
+        #Command-line argument for pickups.json file
         pickupsFile = sys.argv[2]
 
         driver = Driver()
@@ -139,8 +153,10 @@ class RoutingApplication:
 
         self.toJSONOutput(assignMap, pickupData, shiftMap)
 
+    #To convert the assigned routes into required JSON format
     def toJSONOutput(self,assignMap, pickupData, shiftMap):
         assignedRoutes = []
+        #Command-line argument for output file name. Ex: output.json
         outputfilename = sys.argv[3]
         for name, pickupList in assignMap.items():
             pickups = [pickupData[idx] for idx in pickupList]
