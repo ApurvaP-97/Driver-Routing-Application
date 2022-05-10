@@ -7,7 +7,8 @@
      
    Note: Output.json is the name of the output file with the pickups mapped to drivers.
 4. By default, the output is directed to output.json file(toConsole=False). To get console output, set toConsole=True in the main function.<br> 
-     app.runRoutingApp(toConsole=True)
+     <br>
+     <b><i>app.runRoutingApp(toConsole=True)</i></b>
 6. Run test_routes.py to verify the outputs. OutputRequired.json should be modified as per the expected output.
 
 ## Assumptions/Tradeoffs: 
